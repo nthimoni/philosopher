@@ -6,13 +6,13 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 15:28:10 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/19 15:43:01 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/02/19 15:53:25 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 
-static long int	ft_atol(const char *str)
+long int	ft_atol(const char *str)
 {
 	int			signe;
 	long int	ret;

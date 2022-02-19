@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   log.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/19 15:12:52 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/19 15:52:51 by nthimoni         ###   ########.fr       */
+/*   Created: 2022/02/19 16:52:33 by nthimoni          #+#    #+#             */
+/*   Updated: 2022/02/19 17:02:54 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "philo.h"
 
-int	error_parse(int	err)
+void	log(int id, int action)
 {
-	if (!err)
-		return (0);
-	printf("\033[0;31m");	
-	if (err == -1)
-		printf("Nombre d'arguments incorrect !\n");
-	else if (err == -2)
-		printf("Argument(s) invalide(s) !\n");
-	else if (err == -3)
-		printf("Erreur lors de l'acces a l'horloge !\n");
-	return (-1);
+	printf("[%5d] %3d ", get_time(), action);
+	if (action == FORK)
+		printf("has taken a fork\n");
+	else if (action == EAT)
+		printf("is eating\n");
+	else if (action == SLEEP)
+		printf("is sleeping\n");
+	else if (action == THINK)
+		printf("is thinking\n");
+	else if (action == EAT)
+		printf("died\n");
 }

@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/19 15:12:52 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/19 15:52:51 by nthimoni         ###   ########.fr       */
+/*   Created: 2022/02/19 16:44:52 by nthimoni          #+#    #+#             */
+/*   Updated: 2022/02/19 18:16:12 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "philo.h"
 
-int	error_parse(int	err)
+void	routine(void *arg)
 {
-	if (!err)
-		return (0);
-	printf("\033[0;31m");	
-	if (err == -1)
-		printf("Nombre d'arguments incorrect !\n");
-	else if (err == -2)
-		printf("Argument(s) invalide(s) !\n");
-	else if (err == -3)
-		printf("Erreur lors de l'acces a l'horloge !\n");
-	return (-1);
+	t_philo	*philo;
+
+	philo = arg;
+	while (get_time(philo->info) - philo->last_eat < philo->info->time_to_die)
+	{
+	}
+	log(philo->id, DIE);
 }
