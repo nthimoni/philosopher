@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthimoni <nthimoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/19 02:13:20 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/19 12:30:55 by nthimoni         ###   ########.fr       */
+/*   Created: 2022/02/19 12:31:10 by nthimoni          #+#    #+#             */
+/*   Updated: 2022/02/19 12:44:25 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
-
-typedef struct	s_info
+int	init_time(t_info *info)
 {
-	int	nb_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	nb_eat;
-	int	start_time;
-}	t_info;
+	timeval tv;
+}
 
-typedef struct	s_philo
+long	get_time(t_info *info)
 {
-	int	id;
-	int	last_eat;
-}	t_philo;
 
-#endif
+}
