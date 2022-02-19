@@ -2,7 +2,11 @@ SRCDIR = src/
 OBJDIR = bin/
 INCDIR = include/
 ######################################################################
-SRCS = main.c
+SRCS = main.c\
+		time.c\
+		parse.c\
+		error.c\
+		utils.c
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 #####################################################################
 CC = gcc
