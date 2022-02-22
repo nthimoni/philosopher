@@ -6,12 +6,14 @@
 /*   By: nthimoni <nthimoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 02:13:20 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/20 16:32:18 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/02/22 04:34:56 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+
+# include <pthread.h>
 
 typedef struct	s_info
 {
@@ -23,7 +25,7 @@ typedef struct	s_info
 	long			start_time;
 	int				is_finish;
 	pthread_mutex_t	mut_fin;
-	pthread_mutex_t	*mut_fork;
+	pthread_mutex_t	*fork;
 }	t_info;
 
 typedef struct	s_philo
@@ -32,6 +34,8 @@ typedef struct	s_philo
 	int				last_eat;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	m_last_eat;
+	t_info			*info;
 }	t_philo;
 
 // time.c
@@ -49,11 +53,14 @@ int		is_valid_uint(char *str);
 long	ft_atol(const char *str);
 
 // log.c
-void	log(int id, int action);
-# define FORK
-# define EAT
-# define SLEEP
-# define THINK
-# define DIE
+void	log_action(int id, int action, t_info *info);
+
+// routine.c
+void	*routine(void *arg);
+# define FORK 1
+# define EAT 2
+# define SLEEP 3
+# define THINK 4
+# define DIE 5
 
 #endif

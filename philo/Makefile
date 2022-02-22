@@ -6,11 +6,13 @@ SRCS = main.c\
 		time.c\
 		parse.c\
 		error.c\
-		utils.c
+		utils.c\
+		log.c\
+		routine.c
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 #####################################################################
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc -g
+CFLAGS = #-Wall -Wextra -Werror
 LINK = -pthread
 INCPATH = -I$(INCDIR)
 NAME = philo

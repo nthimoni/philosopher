@@ -6,23 +6,23 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 16:52:33 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/19 17:02:54 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/02/22 05:30:38 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdio.h>
 
-void	log(int id, int action)
+void	log_action(int id, int action, t_info *info)
 {
-	printf("[%5d] %3d ", get_time(), action);
 	if (action == FORK)
-		printf("has taken a fork\n");
+		printf("[%4ld ms] %3d  \033[1;33mhas taken a fork\n\033[0m", get_time(info), id);
 	else if (action == EAT)
-		printf("is eating\n");
+		printf("[%4ld ms] %3d  \033[1;32mis eating\n\033[0m", get_time(info), id);
 	else if (action == SLEEP)
-		printf("is sleeping\n");
+		printf("[%4ld ms] %3d  \033[1;36mis sleeping\n\033[0m", get_time(info), id);
 	else if (action == THINK)
-		printf("is thinking\n");
-	else if (action == EAT)
-		printf("died\n");
+		printf("[%4ld ms] %3d  \033[1;35mis thinking\n\033[0m", get_time(info), id);
+	if (action == DIE)
+		printf("[%4ld ms] %3d  \033[1;31mdied\n\033[0m", get_time(info), id);
 }
