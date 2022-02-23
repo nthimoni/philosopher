@@ -6,7 +6,7 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:40:10 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/22 18:31:38 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/02/23 01:45:31 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,14 @@ int	is_dead(t_info *info, t_philo *philo)
 			pthread_mutex_unlock(&philo[i].m_last_eat);
 			return (philo[i].id);
 		}
+		if (philo[i].nb_of_eat >= info->nb_eat && info->nb_eat != -1)
+		{
+			pthread_mutex_lock(&info->mut_fin);
+			info->is_finish = 1;
+			pthread_mutex_unlock(&info->mut_fin);
+			pthread_mutex_unlock(&philo[i].m_last_eat);
+			return (-1);
+		}
 		pthread_mutex_unlock(&philo[i].m_last_eat);
 		i++;
 	}
@@ -100,6 +108,7 @@ int	init_thread(pthread_t **thread, t_philo *philo, int nb)
 	}
 	return (0);
 }
+
 void	join_thread(pthread_t *thread, int nb)
 {
 	int	i;
@@ -130,7 +139,8 @@ int main(int argc, char *argv[])
 		usleep(10);
 		dead_philo_id = is_dead(&info, philo);
 	}
-	log_action(dead_philo_id, DIE, &info);
+	if (dead_philo_id != -1)
+		log_action(dead_philo_id, DIE, &info);
 	join_thread(thread, info.nb_philo);
 	destroy_mutex(&info, philo);
 	free(thread);
