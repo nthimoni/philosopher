@@ -6,7 +6,7 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 15:12:52 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/19 15:52:51 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/08 03:05:32 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ int	error_parse(int	err)
 		printf("Argument(s) invalide(s) !\n");
 	else if (err == -3)
 		printf("Erreur lors de l'acces a l'horloge !\n");
+	else if (err == -4)
+		printf("Erreur lors de la creation d'un semaphore !\n");
 	return (-1);
 }

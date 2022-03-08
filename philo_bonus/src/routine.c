@@ -5,46 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/19 16:44:52 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/23 15:22:42 by nthimoni         ###   ########.fr       */
+/*   Created: 2022/03/08 03:20:38 by nthimoni          #+#    #+#             */
+/*   Updated: 2022/03/08 03:28:23 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <unistd.h>
 
-void	eat(t_philo *philo)
+void	eat(t_info *info)
 {
-	pthread_mutex_lock(philo->l_fork);
-	log_action(philo->id, FORK, philo->info);
-	pthread_mutex_lock(philo->r_fork);
-	log_action(philo->id, FORK, philo->info);
-	pthread_mutex_lock(&philo->m_last_eat);
-	philo->last_eat = get_time(philo->info);
-	philo->nb_of_eat++;
-	log_action(philo->id, EAT, philo->info);
-	pthread_mutex_unlock(&philo->m_last_eat);
-	pthread_mutex_unlock(philo->l_fork);
-	pthread_mutex_unlock(philo->r_fork);
-	usleep(philo->info->time_to_eat * 1000);
+	sem_wait(info->forks);
+	sem_wait(info->forks);
+	log_action(info->id, FORK, info);
+	log_action(info->id, FORK, info);
+	sem_post(info->forks);
+	sem_post(info->forks);
 }
-void	sleep_philo(t_philo *philo)
+void	sleep_philo(t_info *info)
 {
-	log_action(philo->id, SLEEP, philo->info);
-	usleep(philo->info->time_to_sleep * 1000);
+	log_action(philo->id, SLEEP, info);
+	usleep(info->time_to_sleep * 1000);
 }
 void	think(t_philo *philo)
 {
-	log_action(philo->id, THINK, philo->info);
+	log_action(info->id, THINK, philo->info);
 }
 
-void	*routine(void *arg)
+void	routine(t_info *info)
 {
 	t_philo	*philo;
 
 	philo = arg;
-	if (philo->id % 2)
-		usleep(philo->info->time_to_eat * 1000);
+	if (info->id % 2)
+		usleep(info->time_to_eat * 1000);
 	pthread_mutex_lock(&philo->info->mut_fin);
 	while (!philo->info->is_finish)
 	{
