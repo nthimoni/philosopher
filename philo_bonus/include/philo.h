@@ -6,7 +6,7 @@
 /*   By: nthimoni <nthimoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 02:13:20 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/08 03:26:24 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/14 05:32:06 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include <pthread.h>
 # include <semaphore.h>
+# include <signal.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct	s_info
 {
@@ -23,11 +28,23 @@ typedef struct	s_info
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		nb_eat;
+	int		last_eat;
 	long	start_time;
-	sem_t	*fini;
+	int		is_finish;
+	int		*pid;
+	sem_t	*fini_sem;
 	sem_t	*forks;
+	sem_t	*nb_meal;
+	sem_t	*nb_process_to_kill;
 	int		id;
 }	t_info;
+
+typedef struct	s_sem_val
+{
+	int		end_process;
+	sem_t	*sem_end_process;
+	t_info	*info;
+}	t_sem_val;
 
 // time.c
 int init_time(t_info *info);
@@ -47,11 +64,7 @@ long	ft_atol(const char *str);
 void	log_action(int id, int action, t_info *info);
 
 // routine.c
-void	*routine(void *arg);
-
-// lonely_philo.c
-int	lonely_philo(t_info *info, t_philo *philo);
-int		destroy_mutex(t_info *info, t_philo *philo);
+void	routine(t_info *info);
 
 # define FORK 1
 # define EAT 2
