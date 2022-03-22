@@ -6,7 +6,7 @@
 /*   By: nthimoni <nthimoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 02:13:20 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/20 23:23:21 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/22 06:54:49 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct	s_info
-{
-	int		nb_philo;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		nb_eat;
-	int		last_eat;
-	long	start_time;
-	int		is_finish;
-	int		*pid;
-	int		id;
-}	t_info;
-
 typedef struct s_allsem
 {
 	sem_t	*forks;
@@ -42,8 +28,23 @@ typedef struct s_allsem
 	sem_t	*dead_cond;
 	sem_t	*time_to_die;
 	sem_t   *finish_val;
+	sem_t	*last_eat;
 }	t_allsem;
 
+typedef struct	s_info
+{
+	int			nb_philo;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
+	int			max_meal;
+	int			nb_meal;
+	int			last_eat;
+	long		start_time;
+	int			is_finish;
+	int			id;
+	t_allsem	*sem;
+}	t_info;
 
 // time.c
 int init_time(t_info *info);
@@ -64,6 +65,11 @@ void	log_action(int id, int action, t_info *info);
 
 // routine.c
 void	routine(t_info *info);
+int		is_dead(t_info *info);
+
+// detect_death.c
+void	*detect_death(void *arg);
+void	*wait_death(void *arg);
 
 # define FORK 1
 # define EAT 2
