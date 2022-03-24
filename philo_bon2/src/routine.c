@@ -6,37 +6,12 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 03:20:38 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/24 01:30:46 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/24 06:31:43 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <unistd.h>
-
-int	is_dead(t_info *info)
-{
-	sem_wait(info->sem->finish_val);
-	if (info->is_finish)
-	{
-		sem_post(info->sem->finish_val);
-		return (1);
-	}
-	sem_post(info->sem->finish_val);
-	return (0);
-}
-
-void	smart_sleep(t_info *info, int duree_ms)
-{
-	int	time;
-
-	time = get_time(info);
-	while(get_time(info) - time < duree_ms)
-	{
-		usleep(1000);
-		if (is_dead(info))
-			break;
-	}
-}
 
 void	eat(t_info *info)
 {
@@ -45,11 +20,11 @@ void	eat(t_info *info)
 	log_action(info->id, FORK, info);
 	sem_post(info->sem->dead_cond);
 	sem_wait(info->sem->forks);
-	log_action(info->id, FORK, info);
 	sem_wait(info->sem->dead_cond);
+	log_action(info->id, FORK, info);
 	info->last_eat = get_time(info);
 	info->nb_meal += 1;
-	if (info->nb_meal == info->max_meal)
+	if (info->nb_meal == info->max_meal && info->max_meal != -1)
 		sem_post(info->sem->ate_enough);
 	log_action(info->id, EAT, info);
 	sem_post(info->sem->dead_cond);
@@ -74,9 +49,9 @@ void	generate_name(char *buf, int id, char *pref)
 	i = 0;
 	len = ft_strlen(pref);
 	ft_strlcpy(buf, pref, len);
-	while(i < 6)
+	while (i < 6)
 	{
-		buf[len + i] = id % 10;
+		buf[len + i] = (id % 10) + '0';
 		id /= 10;
 		i++;
 	}
@@ -93,26 +68,27 @@ int	create_sem(t_info *info)
 	generate_name(buf, info->id, "/last_eat");
 	info->sem->last_eat = sem_open(buf, O_CREAT, S_IRWXU, 1);
 	sem_unlink(buf);
-	if (info->sem->finish_val == SEM_FAILED || info->sem->last_eat)
-		printf("oupsi\n");
 	return (0);
 }
 
 void	routine(t_info *info)
 {
-	pthread_t	*detect;
-	pthread_t	*wait;
+	pthread_t	detect;
+	pthread_t	wait;
 
-	pthread_create(wait, NULL, wait_death, info);
-	pthread_create(detect, NULL, detect_death, info);
+	create_sem(info);
+	pthread_create(&wait, NULL, wait_death, info);
+	pthread_create(&detect, NULL, detect_death, info);
+	if (info->id % 2 == 0)
+		smart_sleep(info, info->time_to_eat / 2);
 	while (!is_dead(info))
 	{
 		eat(info);
 		sleep_philo(info);
 		sem_wait(info->sem->dead_cond);
 		log_action(info->id, THINK, info);
-		sem_post(info->sem->dead_cond);;
+		sem_post(info->sem->dead_cond);
 	}
-	pthread_join(*wait, NULL);
-	pthread_join(*detect, NULL);
+	pthread_join(wait, NULL);
+	pthread_join(detect, NULL);
 }

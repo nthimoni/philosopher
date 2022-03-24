@@ -6,7 +6,7 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 15:28:10 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/24 01:03:56 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/24 06:00:49 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_isdigit(int c)
 	return (0);
 }
 
-int is_valid_uint(char *str)
+int	is_valid_uint(char *str)
 {
 	int		i;
 
@@ -67,7 +67,7 @@ size_t	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
 	return (i);
 }

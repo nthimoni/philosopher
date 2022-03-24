@@ -6,6 +6,7 @@ SRCS = main.c\
 		time.c\
 		parse.c\
 		utils.c\
+		utils2.c\
 		log.c\
 		routine.c\
 		error.c\

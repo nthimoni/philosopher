@@ -6,7 +6,7 @@
 /*   By: nthimoni <nthimoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 02:05:54 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/22 06:52:37 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/24 06:29:28 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	parse(int argc, char *argv[], t_info *info)
 	info->time_to_sleep = ft_atol(argv[4]);
 	info->max_meal = -1;
 	info->nb_meal = 0;
+	info->last_eat = 0;
 	if (argc == 6)
 		info->max_meal = ft_atol(argv[5]);
 	if (init_time(info) == -1)

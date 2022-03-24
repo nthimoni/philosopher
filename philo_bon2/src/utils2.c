@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/19 15:12:52 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/24 05:51:34 by nthimoni         ###   ########.fr       */
+/*   Created: 2022/03/24 06:04:49 by nthimoni          #+#    #+#             */
+/*   Updated: 2022/03/24 06:07:03 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "philo.h"
 
-int	error_parse(int err)
+int	is_dead(t_info *info)
 {
-	if (!err)
-		return (0);
-	printf("\033[0;31m");
-	if (err == -1)
-		printf("Nombre d'arguments incorrect !\n");
-	else if (err == -2)
-		printf("Argument(s) invalide(s) !\n");
-	else if (err == -3)
-		printf("Erreur lors de l'acces a l'horloge !\n");
-	else if (err == -4)
-		printf("Erreur lors de la creation d'un semaphore !\n");
-	return (-1);
+	sem_wait(info->sem->finish_val);
+	if (info->is_finish)
+	{
+		sem_post(info->sem->finish_val);
+		return (1);
+	}
+	sem_post(info->sem->finish_val);
+	return (0);
+}
+
+void	smart_sleep(t_info *info, int duree_ms)
+{
+	int	time;
+
+	time = get_time(info);
+	while (get_time(info) - time < duree_ms)
+	{
+		usleep(1000);
+		if (is_dead(info))
+			break ;
+	}
 }

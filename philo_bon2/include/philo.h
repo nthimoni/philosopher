@@ -6,7 +6,7 @@
 /*   By: nthimoni <nthimoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 02:13:20 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/24 01:03:54 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/24 06:06:49 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ typedef struct s_allsem
 	sem_t	*ate_enough;
 	sem_t	*dead_cond;
 	sem_t	*time_to_die;
-	sem_t   *finish_val;
+	sem_t	*finish_val;
 	sem_t	*last_eat;
 }	t_allsem;
 
-typedef struct	s_info
+typedef struct s_info
 {
 	int			nb_philo;
 	int			time_to_die;
@@ -47,14 +47,14 @@ typedef struct	s_info
 }	t_info;
 
 // time.c
-int init_time(t_info *info);
-long get_time(t_info *info);
+int		init_time(t_info *info);
+long	get_time(t_info *info);
 
 // parse.c
-int	parse(int argc, char *argv[], t_info *info);
+int		parse(int argc, char *argv[], t_info *info);
 
 // error.c
-int	error_parse(int err);
+int		error_parse(int err);
 
 // utils.c
 size_t	ft_strlen(const char *s);
@@ -62,6 +62,8 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 int		is_valid_uint(char *str);
 long	ft_atol(const char *str);
 
+// utils.c
+void	smart_sleep(t_info *info, int duree_ms);
 // log.c
 void	log_action(int id, int action, t_info *info);
 
