@@ -6,7 +6,7 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 02:04:19 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/22 07:19:48 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/24 00:59:15 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 int init_sem(t_info *info)
 {
-	sem_open("/forks_philo", O_CREAT, S_IRWXU, info->nb_philo);
+	info->sem->forks = sem_open("/forks_philo", O_CREAT, S_IRWXU, info->nb_philo);
 	sem_unlink("/forks_philo");
-	sem_open("/ate_enough", O_CREAT, S_IRWXU, info->nb_philo);
+	info->sem->ate_enough = sem_open("/ate_enough", O_CREAT, S_IRWXU, 0);
 	sem_unlink("/ate_enough");
-	sem_open("/dead_cond_philo", O_CREAT, S_IRWXU, info->nb_philo);
+	info->sem->dead_cond = sem_open("/dead_cond_philo", O_CREAT, S_IRWXU, 1);
 	sem_unlink("/dead_cond_philo");
-	sem_open("/time_to_die_philo", O_CREAT, S_IRWXU, info->nb_philo);
+	info->sem->time_to_die = sem_open("/time_to_die_philo", O_CREAT, S_IRWXU, 0);
 	sem_unlink("/time_to_die_philo");
-	return (1);
+	return (0);
 }
 
 void *check_meal()
@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 
 	if (error_parse(parse(argc, argv, &info)))
 		return (-1);
+	init_sem(&info);
 	pid = 1;
 	nb_fork = 0;
 	info.last_eat = 0;

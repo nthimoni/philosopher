@@ -8,7 +8,8 @@ SRCS = main.c\
 		utils.c\
 		log.c\
 		routine.c\
-		error.c
+		error.c\
+		detect_death.c
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 #####################################################################
 CC = gcc -g

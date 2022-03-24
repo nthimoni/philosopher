@@ -6,7 +6,7 @@
 /*   By: nthimoni <nthimoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 02:13:20 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/22 06:54:49 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/24 01:03:54 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	parse(int argc, char *argv[], t_info *info);
 int	error_parse(int err);
 
 // utils.c
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 int		is_valid_uint(char *str);
 long	ft_atol(const char *str);
 
