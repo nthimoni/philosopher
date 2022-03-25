@@ -1,0 +1,73 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+$(NAME)	Makefile	/^$(NAME): $(OBJS)$/;"	t
+$(OBJDIR)%.o	Makefile	/^$(OBJDIR)%.o: $(SRCDIR)%.c$/;"	t
+CC	Makefile	/^CC = gcc -g$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -Wextra -Werror$/;"	m
+DIE	include/philo.h	/^# define DIE /;"	d
+EAT	include/philo.h	/^# define EAT /;"	d
+FORK	include/philo.h	/^# define FORK /;"	d
+INCDIR	Makefile	/^INCDIR = include\/$/;"	m
+INCPATH	Makefile	/^INCPATH = -I$(INCDIR)$/;"	m
+LINK	Makefile	/^LINK = -pthread$/;"	m
+NAME	Makefile	/^NAME = philo$/;"	m
+OBJDIR	Makefile	/^OBJDIR = bin\/$/;"	m
+OBJS	Makefile	/^OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))$/;"	m
+PHILO_H	include/philo.h	/^# define PHILO_H$/;"	d
+SLEEP	include/philo.h	/^# define SLEEP /;"	d
+SRCDIR	Makefile	/^SRCDIR = src\/$/;"	m
+SRCS	Makefile	/^SRCS = main.c\\$/;"	m
+Settings	.ycm_extra_conf.py	/^def Settings( **kwargs ):$/;"	f
+THINK	include/philo.h	/^# define THINK /;"	d
+all	Makefile	/^all: $(NAME)$/;"	t
+ate_enough	include/philo.h	/^	sem_t	*ate_enough;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
+check_meal	src/main.c	/^void	*check_meal(void *arg)$/;"	f	typeref:typename:void *
+clean	Makefile	/^clean:$/;"	t
+create_sem	src/routine.c	/^int	create_sem(t_info *info)$/;"	f	typeref:typename:int
+dead_cond	include/philo.h	/^	sem_t	*dead_cond;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
+detect_death	src/detect_death.c	/^void	*detect_death(void *arg)$/;"	f	typeref:typename:void *
+eat	src/routine.c	/^void	eat(t_info *info)$/;"	f	typeref:typename:void
+error_parse	src/error.c	/^int	error_parse(int err)$/;"	f	typeref:typename:int
+fclean	Makefile	/^fclean: clean$/;"	t
+finish_val	include/philo.h	/^	sem_t	*finish_val;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
+forks	include/philo.h	/^	sem_t	*forks;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
+ft_atol	src/utils.c	/^long int	ft_atol(const char *str)$/;"	f	typeref:typename:long int
+ft_init_sem	src/main.c	/^int	ft_init_sem(t_info *info)$/;"	f	typeref:typename:int
+ft_isdigit	src/utils.c	/^static int	ft_isdigit(int c)$/;"	f	typeref:typename:int	file:
+ft_strlcpy	src/utils.c	/^size_t	ft_strlcpy(char *dest, const char *src, size_t size)$/;"	f	typeref:typename:size_t
+ft_strlen	src/utils.c	/^size_t	ft_strlen(const char *s)$/;"	f	typeref:typename:size_t
+generate_name	src/routine.c	/^void	generate_name(char *buf, int id, char *pref)$/;"	f	typeref:typename:void
+get_time	src/time.c	/^long	get_time(t_info *info)$/;"	f	typeref:typename:long
+id	include/philo.h	/^	int			id;$/;"	m	struct:s_info	typeref:typename:int
+init_time	src/time.c	/^int	init_time(t_info *info)$/;"	f	typeref:typename:int
+is_dead	src/utils2.c	/^int	is_dead(t_info *info)$/;"	f	typeref:typename:int
+is_finish	include/philo.h	/^	int			is_finish;$/;"	m	struct:s_info	typeref:typename:int
+is_valid_uint	src/utils.c	/^int	is_valid_uint(char *str)$/;"	f	typeref:typename:int
+last_eat	include/philo.h	/^	int			last_eat;$/;"	m	struct:s_info	typeref:typename:int
+last_eat	include/philo.h	/^	sem_t	*last_eat;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
+log_action	src/log.c	/^void	log_action(int id, int action, t_info *info)$/;"	f	typeref:typename:void
+main	src/main.c	/^int	main(int argc, char *argv[])$/;"	f	typeref:typename:int
+max_meal	include/philo.h	/^	int			max_meal;$/;"	m	struct:s_info	typeref:typename:int
+nb_meal	include/philo.h	/^	int			nb_meal;$/;"	m	struct:s_info	typeref:typename:int
+nb_philo	include/philo.h	/^	int			nb_philo;$/;"	m	struct:s_info	typeref:typename:int
+parse	src/parse.c	/^int	parse(int argc, char *argv[], t_info *info)$/;"	f	typeref:typename:int
+re	Makefile	/^re: fclean $(NAME)$/;"	t
+routine	src/routine.c	/^void	routine(t_info *info)$/;"	f	typeref:typename:void
+s_allsem	include/philo.h	/^typedef struct s_allsem$/;"	s
+s_info	include/philo.h	/^typedef struct s_info$/;"	s
+sem	include/philo.h	/^	t_allsem	*sem;$/;"	m	struct:s_info	typeref:typename:t_allsem *
+sleep_philo	src/routine.c	/^void	sleep_philo(t_info *info)$/;"	f	typeref:typename:void
+smart_sleep	src/utils2.c	/^void	smart_sleep(t_info *info, int duree_ms)$/;"	f	typeref:typename:void
+start_time	include/philo.h	/^	long		start_time;$/;"	m	struct:s_info	typeref:typename:long
+t_allsem	include/philo.h	/^}	t_allsem;$/;"	t	typeref:struct:s_allsem
+t_info	include/philo.h	/^}	t_info;$/;"	t	typeref:struct:s_info
+time_to_die	include/philo.h	/^	int			time_to_die;$/;"	m	struct:s_info	typeref:typename:int
+time_to_die	include/philo.h	/^	sem_t	*time_to_die;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
+time_to_eat	include/philo.h	/^	int			time_to_eat;$/;"	m	struct:s_info	typeref:typename:int
+time_to_sleep	include/philo.h	/^	int			time_to_sleep;$/;"	m	struct:s_info	typeref:typename:int
+wait_death	src/detect_death.c	/^void	*wait_death(void *arg)$/;"	f	typeref:typename:void *
