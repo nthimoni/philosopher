@@ -6,7 +6,7 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 16:44:52 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/23 15:22:42 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/25 03:05:23 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	eat(t_philo *philo)
 	philo->nb_of_eat++;
 	log_action(philo->id, EAT, philo->info);
 	pthread_mutex_unlock(&philo->m_last_eat);
+	usleep(philo->info->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
-	usleep(philo->info->time_to_eat * 1000);
 }
 void	sleep_philo(t_philo *philo)
 {
