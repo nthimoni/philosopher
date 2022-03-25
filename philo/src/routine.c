@@ -6,7 +6,7 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 16:44:52 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/25 03:05:23 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/25 03:45:00 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,20 @@
 
 void	eat(t_philo *philo)
 {
-	pthread_mutex_lock(philo->l_fork);
-	log_action(philo->id, FORK, philo->info);
-	pthread_mutex_lock(philo->r_fork);
-	log_action(philo->id, FORK, philo->info);
+	if (philo->id != 1)
+	{
+		pthread_mutex_lock(philo->l_fork);
+		log_action(philo->id, FORK, philo->info);
+		pthread_mutex_lock(philo->r_fork);
+		log_action(philo->id, FORK, philo->info);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->r_fork);
+		log_action(philo->id, FORK, philo->info);
+		pthread_mutex_lock(philo->l_fork);
+		log_action(philo->id, FORK, philo->info);
+	}
 	pthread_mutex_lock(&philo->m_last_eat);
 	philo->last_eat = get_time(philo->info);
 	philo->nb_of_eat++;
@@ -28,11 +38,13 @@ void	eat(t_philo *philo)
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
 }
+
 void	sleep_philo(t_philo *philo)
 {
 	log_action(philo->id, SLEEP, philo->info);
 	usleep(philo->info->time_to_sleep * 1000);
 }
+
 void	think(t_philo *philo)
 {
 	log_action(philo->id, THINK, philo->info);

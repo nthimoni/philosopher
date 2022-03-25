@@ -6,7 +6,7 @@
 /*   By: nthimoni <nthimoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 02:13:20 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/02/23 16:07:31 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/25 04:08:53 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define PHILO_H
 
 # include <pthread.h>
+# include <stdlib.h>
 
-typedef struct	s_info
+typedef struct s_info
 {
 	int				nb_philo;
 	int				time_to_die;
@@ -28,7 +29,7 @@ typedef struct	s_info
 	pthread_mutex_t	*fork;
 }	t_info;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int				id;
 	int				last_eat;
@@ -40,18 +41,20 @@ typedef struct	s_philo
 }	t_philo;
 
 // time.c
-int init_time(t_info *info);
-long get_time(t_info *info);
+int		init_time(t_info *info);
+long	get_time(t_info *info);
 
 // parse.c
-int	parse(int argc, char *argv[], t_info *info);
+int		parse(int argc, char *argv[], t_info *info);
 
 // error.c
-int	error_parse(int err);
+int		error_parse(int err);
 
 // utils.c
 int		is_valid_uint(char *str);
 long	ft_atol(const char *str);
+void	join_thread(pthread_t *thread, int nb);
+int		init_mutex(t_info *info, t_philo **philo);
 
 // log.c
 void	log_action(int id, int action, t_info *info);
@@ -60,7 +63,7 @@ void	log_action(int id, int action, t_info *info);
 void	*routine(void *arg);
 
 // lonely_philo.c
-int	lonely_philo(t_info *info, t_philo *philo);
+int		lonely_philo(t_info *info, t_philo *philo);
 int		destroy_mutex(t_info *info, t_philo *philo);
 
 # define FORK 1

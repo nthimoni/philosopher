@@ -13,7 +13,7 @@ SRCS = main.c\
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 #####################################################################
 CC = gcc -g
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 LINK = -pthread
 INCPATH = -I$(INCDIR)
 NAME = philo
