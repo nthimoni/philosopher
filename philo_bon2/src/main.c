@@ -6,7 +6,7 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 02:04:19 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/24 06:34:06 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:50:18 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,26 @@ void	*check_meal(void *arg)
 	return (NULL);
 }
 
+int	fork_philo(t_info *info)
+{
+	int	nb_fork;
+	int	pid;
+
+	nb_fork = 0;
+	pid = 1;
+	while (pid != 0 && nb_fork < info->nb_philo)
+	{
+		info->id = nb_fork + 1;
+		pid = fork();
+		nb_fork++;
+	}
+	return (pid);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_info		info;
 	int			pid;
-	int			nb_fork;
 	t_allsem	sem;
 	pthread_t	thread;
 	pthread_t	check_meal_t;
@@ -66,14 +81,8 @@ int	main(int argc, char *argv[])
 	if (error_parse(parse(argc, argv, &info)))
 		return (-1);
 	ft_init_sem(&info);
-	pid = 1;
-	nb_fork = 0;
-	while (pid != 0 && nb_fork < info.nb_philo)
-	{
-		pid = fork();
-		info.id = nb_fork + 1;
-		nb_fork++;
-	}
+	pid = fork_philo(&info);
+	init_time(&info);
 	if (pid == 0)
 	{
 		routine(&info);
