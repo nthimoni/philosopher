@@ -28,6 +28,7 @@ all	Makefile	/^all: $(NAME)$/;"	t
 ate_enough	include/philo.h	/^	sem_t	*ate_enough;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
 check_meal	src/main.c	/^void	*check_meal(void *arg)$/;"	f	typeref:typename:void *
 clean	Makefile	/^clean:$/;"	t
+close_all_sem	src/utils2.c	/^void	close_all_sem(t_allsem *sem, int code)$/;"	f	typeref:typename:void
 create_sem	src/routine.c	/^int	create_sem(t_info *info)$/;"	f	typeref:typename:int
 dead_cond	include/philo.h	/^	sem_t	*dead_cond;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
 detect_death	src/detect_death.c	/^void	*detect_death(void *arg)$/;"	f	typeref:typename:void *
@@ -35,8 +36,10 @@ eat	src/routine.c	/^void	eat(t_info *info)$/;"	f	typeref:typename:void
 error_parse	src/error.c	/^int	error_parse(int err)$/;"	f	typeref:typename:int
 fclean	Makefile	/^fclean: clean$/;"	t
 finish_val	include/philo.h	/^	sem_t	*finish_val;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
+fork_philo	src/main.c	/^int	fork_philo(t_info *info)$/;"	f	typeref:typename:int
 forks	include/philo.h	/^	sem_t	*forks;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
 ft_atol	src/utils.c	/^long int	ft_atol(const char *str)$/;"	f	typeref:typename:long int
+ft_bzero	src/utils2.c	/^void	ft_bzero(void *pointer, size_t count)$/;"	f	typeref:typename:void
 ft_init_sem	src/main.c	/^int	ft_init_sem(t_info *info)$/;"	f	typeref:typename:int
 ft_isdigit	src/utils.c	/^static int	ft_isdigit(int c)$/;"	f	typeref:typename:int	file:
 ft_strlcpy	src/utils.c	/^size_t	ft_strlcpy(char *dest, const char *src, size_t size)$/;"	f	typeref:typename:size_t
@@ -48,10 +51,12 @@ init_time	src/time.c	/^int	init_time(t_info *info)$/;"	f	typeref:typename:int
 is_dead	src/utils2.c	/^int	is_dead(t_info *info)$/;"	f	typeref:typename:int
 is_finish	include/philo.h	/^	int			is_finish;$/;"	m	struct:s_info	typeref:typename:int
 is_valid_uint	src/utils.c	/^int	is_valid_uint(char *str)$/;"	f	typeref:typename:int
+kill_all_philos	src/utils2.c	/^void	kill_all_philos(t_allsem *sem, int code, int nb_philos)$/;"	f	typeref:typename:void
 last_eat	include/philo.h	/^	int			last_eat;$/;"	m	struct:s_info	typeref:typename:int
 last_eat	include/philo.h	/^	sem_t	*last_eat;$/;"	m	struct:s_allsem	typeref:typename:sem_t *
 log_action	src/log.c	/^void	log_action(int id, int action, t_info *info)$/;"	f	typeref:typename:void
 main	src/main.c	/^int	main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main_routine	src/main.c	/^void	main_routine(t_info *info)$/;"	f	typeref:typename:void
 max_meal	include/philo.h	/^	int			max_meal;$/;"	m	struct:s_info	typeref:typename:int
 nb_meal	include/philo.h	/^	int			nb_meal;$/;"	m	struct:s_info	typeref:typename:int
 nb_philo	include/philo.h	/^	int			nb_philo;$/;"	m	struct:s_info	typeref:typename:int

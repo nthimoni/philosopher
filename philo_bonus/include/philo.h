@@ -6,7 +6,7 @@
 /*   By: nthimoni <nthimoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 02:13:20 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/14 05:32:06 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/26 05:53:50 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,50 +21,61 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct	s_info
+typedef struct s_allsem
 {
-	int		nb_philo;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		nb_eat;
-	int		last_eat;
-	long	start_time;
-	int		is_finish;
-	int		*pid;
-	sem_t	*fini_sem;
 	sem_t	*forks;
-	sem_t	*nb_meal;
-	sem_t	*nb_process_to_kill;
-	int		id;
+	sem_t	*ate_enough;
+	sem_t	*dead_cond;
+	sem_t	*time_to_die;
+	sem_t	*finish_val;
+	sem_t	*last_eat;
+}	t_allsem;
+
+typedef struct s_info
+{
+	int			nb_philo;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
+	int			max_meal;
+	int			nb_meal;
+	int			last_eat;
+	long		start_time;
+	int			is_finish;
+	int			id;
+	t_allsem	*sem;
 }	t_info;
 
-typedef struct	s_sem_val
-{
-	int		end_process;
-	sem_t	*sem_end_process;
-	t_info	*info;
-}	t_sem_val;
-
 // time.c
-int init_time(t_info *info);
-long get_time(t_info *info);
+int		init_time(t_info *info);
+long	get_time(t_info *info);
 
 // parse.c
-int	parse(int argc, char *argv[], t_info *info);
+int		parse(int argc, char *argv[], t_info *info);
 
 // error.c
-int	error_parse(int err);
+int		error_parse(int err);
 
 // utils.c
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 int		is_valid_uint(char *str);
 long	ft_atol(const char *str);
+void	close_all_sem(t_allsem *sem, int code);
+int		is_dead(t_info *info);
+void	smart_sleep(t_info *info, int duree_ms);
+void	kill_all_philos(t_allsem *sem, int code, int nb_philos);
+void	ft_bzero(void *pointer, size_t count);
 
 // log.c
 void	log_action(int id, int action, t_info *info);
 
 // routine.c
 void	routine(t_info *info);
+
+// detect_death.c
+void	*detect_death(void *arg);
+void	*wait_death(void *arg);
 
 # define FORK 1
 # define EAT 2

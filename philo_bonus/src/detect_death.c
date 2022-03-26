@@ -6,7 +6,7 @@
 /*   By: nthimoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 06:16:12 by nthimoni          #+#    #+#             */
-/*   Updated: 2022/03/25 18:16:29 by nthimoni         ###   ########.fr       */
+/*   Updated: 2022/03/26 06:20:40 by nthimoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*detect_death(void *arg)
 		sem_post(info->sem->time_to_die);
 		info->nb_philo--;
 	}
-	usleep(20000);
+	usleep(800000);
 	sem_post(info->sem->dead_cond);
 	return (NULL);
 }
